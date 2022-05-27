@@ -300,10 +300,14 @@ rownames(models) <- c("Decision Tree", "Random Forest", "Boosted Tree")
 models %>%
   arrange(desc(mean))
 ```
-```{r}
+```{r, eval = FALSE}
 best_metrics <- select_best(tune_res)
 rf_final <- finalize_workflow(rf_wf, best_metrics)
 rf_final_fit_testdata <- fit(rf_final, data = pokemon_test)  # use it on the testing or training data?
+```
+```{r, include = FALSE}
+#save(rf_final_fit_testdata, file = "rf_final.Rdata")
+load("rf_final.Rdata")
 ```
 
 Print the AUC value of your best-performing model on the testing set. Print the ROC curves. Finally, create and visualize a confusion matrix heat map.
