@@ -81,16 +81,16 @@ pokemon_recipe <- recipe(type_1 ~ legendary + generation + sp_atk + attack + spe
 Create a correlation matrix of the training set, using the `corrplot` package. *Note: You can choose how to handle the continuous variables for this plot; justify your decision(s).*
 
 ```{r}
-pokemon_continuous <- pokemon[, c(6, 7, 8, 9, 10, 11)]
+pokemon_continuous <- pokemon[, c(5, 6, 7, 8, 9, 10, 11)]
 pokemon_cor <- cor(pokemon_continuous)
 corrplot(pokemon_cor, method = "number", order = "alphabet", type = "lower")
 ```
 
-I kept only the variables that were continuous in nature, so I did not include legendary or generation. I opted not to include the variables that were not in our recipe as well.
+I kept only the variables that were continuous in nature, so I did not include legendary or generation. I opted not to include the variables that were not in our recipe as well, except for total.
 
 What relationships, if any, do you notice? Do these relationships make sense to you?
 
-I notice that attack and defense, sp_atk and attack, speed and attack, sp_def and defense, hp and sp_def, sp_atk and sp_def, and speed and sp_atk were moderately (positively) correlated. I agree with most of the relationships, except for attack and defense. I would have thought that attack and defense would be negatively correlated to balance out the pokemon stats, but their positive association is quite strong! 
+I notice that attack and defense, sp_atk and attack, speed and attack, sp_def and defense, hp and sp_def, sp_atk and sp_def, and speed and sp_atk were moderately (positively) correlated. Additionally, total is quite positively associated with all other variables. I agree with most of the relationships, except for attack and defense. I would have thought that attack and defense would be negatively correlated to balance out the pokemon stats, but their positive association is quite strong! 
 
 ### Exercise 3
 
@@ -206,7 +206,7 @@ load(file = "randomforest1.Rdata")
 ```{r}
 autoplot(tune_res)
 ```
-I observe that less trees tends to yield worse results, the results get better as the mtry values increase, and that a higher minimal node size tends to get better results. Though it really depends on the combination of value for the three hyperparameters.
+I observe that less trees tends to yield worse results, the results get better as the mtry values increase, and that a higher minimal node size tends to get better results. Though it really depends on the combination of value for the three hyperparameters. More specifically, the best values of hyperparameters that seem to yield the best performance are mtry = 8, trees = 78, and min_n = 11.
 
 ### Exercise 7
 
